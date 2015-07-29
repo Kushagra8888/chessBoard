@@ -1,5 +1,7 @@
 //package chessgame;
 
+import java.util.ArrayList;
+
 public class Pawn extends ChessPiece {
     Pawn(int x, int y)
     {

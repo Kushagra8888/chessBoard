@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 /**
  * Created by test on 7/29/2015.
  */
@@ -60,7 +62,7 @@ public class Rook extends ChessPiece {
 	if (isValidPosition && isPathClear)
 	{
 		if(xFinal == -1 && yFinal == -1)
-			return (castle())
+			return (castle());
 	}
 	
 	return isValidPosition && isPathClear;

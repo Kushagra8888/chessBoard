@@ -2,6 +2,7 @@
  * Created by test on 7/29/2015.
  */
 class KingTest extends GroovyTestCase {
+    /*
     void testIsMoveValid() {
         King aKing = new King(3,4)
         assert (aKing.isMoveValid(4,4))
@@ -21,4 +22,5 @@ class KingTest extends GroovyTestCase {
     void testCastling() {
 
     }
+    */
 }

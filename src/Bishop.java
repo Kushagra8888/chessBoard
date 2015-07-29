@@ -9,13 +9,6 @@ public class Bishop extends ChessPiece{
 		this.isAlive = true;
 	}
 	
-	public boolean isMoveValid(int x, int y, ArrayList<int[]> positionsOccupied)
-	{
-		boolean isMoveValid = x - this.x == y - this.y;
-		boolean isPathFree = isPathFree(x, y, positionsOccupied);
-		return isMoveValid && isPathFree;
-	}
-	
 	boolean isPathFree(int x, int y, ArrayList<int[]> positionsOccupied) {
 		if(x - this.x > 0){
 			while (x > this.x && y > this.y) {
@@ -40,4 +33,13 @@ public class Bishop extends ChessPiece{
 		}
 		return true;
 	}
+	
+	public boolean isMoveValid(int x, int y, ArrayList<int[]> positionsOccupied)
+	{
+		boolean isMoveValid = x - this.x == y - this.y;
+		boolean isPathFree = isPathFree(x, y, positionsOccupied);
+		return isMoveValid && isPathFree;
+	}
+	
+	
 }

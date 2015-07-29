@@ -17,6 +17,7 @@ public class ChessGame {
 	final int whitePawnInitialYPos = 2;
 	
 	static HashMap<String, int[]> coordinateMap = new HashMap<String, int[]>();
+	static HashMap<String, Integer> xCoordMap = new HashMap<String, Integer>(); 
 	
 	private HashMap<String, ArrayList<ChessPiece>> blackPieces = new HashMap<String, ArrayList<ChessPiece>>();
 	private HashMap<String, ArrayList<ChessPiece>> whitePieces = new HashMap<String, ArrayList<ChessPiece>>();
@@ -36,6 +37,7 @@ public class ChessGame {
 				coord[1] = j;
 				coordinateMap.put(xPositions[i] + yPositions[j], coord);
 			}
+			xCoordMap.put(xPositions[i], i);
 		}
 	}
 	
@@ -129,10 +131,37 @@ public class ChessGame {
 		whitePieces.put("Q", wqueen);
 	}
 	
+	private boolean isPieceInGivenPos (String currPos, ArrayList<ChessPiece> chPs) {
+		if (xCoordMap.containsKey(currPos)) {
+			return isPieceInGivenXCoord(currPos, chPs);
+		} else {
+			return isPieceInGivenYCoord(currPos, chPs);
+		}
+	}
+	
+	private boolean isPieceInGivenXCoord(String currPos, ArrayList<ChessPiece> chPs) {
+		for (ChessPiece ch : chPs) {
+			if (ch.getXCoord() == xCoordMap.get(currPos)) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	private boolean isPieceInGivenYCoord(String currPos, ArrayList<ChessPiece> chPs) {
+		for (ChessPiece ch : chPs) {
+			if (ch.getYCoord() == Integer.parseInt(currPos)) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
 	private void move (int[] coord, HashMap<String, ArrayList<ChessPiece>> chPs, String move) {
 		ArrayList<ChessPiece> chessPs;
-		
+		String movPos;
 		if (Character.isUpperCase(move.charAt(0))) {
+			movPos = move.substring(1);
 			switch (move.charAt(0)) {
 			case 'N': chessPs = chPs.get("N");
 				break;
@@ -148,13 +177,21 @@ public class ChessGame {
 				chessPs = null;	
 			}
 		} else {
+			movPos = move.substring(0);
 			chessPs = chPs.get("P");
 		}
 		
+		String currPos = null;
+		if ( ! coordinateMap.containsKey(movPos)) {
+			currPos = movPos.substring(0, 1);
+		}
+			
 		for (ChessPiece ch : chessPs) {
 			if (ch.isAlive) {
-				if (ch.move(coord[0], coord[1])) {
-					break;
+				if (isPieceInGivenPos (currPos, chessPs)) {
+					if (ch.move(coord[0], coord[1])) {
+						break;
+					}
 				}
 			}
 		}
@@ -164,9 +201,11 @@ public class ChessGame {
 		String[] moves = movePair.split("\\s+");
 		
 		int[] coord = new int[2];
-		coord = coordinateMap.get(moves[0]);
 		
+		coord = coordinateMap.get(moves[0]);
 		move(coord, whitePieces, moves[0]);
+		
+		coord = coordinateMap.get(moves[1]);
 		move(coord, blackPieces, moves[1]);
 	}
 	

@@ -228,11 +228,10 @@ public class ChessGame {
 	
 	public void displayChessPieceList(ArrayList<ChessPiece> chessPieceList) {
 		int[] coord = new int[2];
-
-		String pos = invertedCoordinateMap.get(coord);
 		for (ChessPiece chessPiece : chessPieceList) {
 			coord[0] = chessPiece.getXCoord();
 			coord[1] = chessPiece.getYCoord();
+			String pos = invertedCoordinateMap.get(coord);
 			System.out.println(pos + "; ");
 		}
 		System.out.println("\n");
@@ -265,6 +264,31 @@ public class ChessGame {
 				System.out.println("Queen");
 				break;
 			}
+	}
+	
+	public ArrayList<int[]> generatePositionsOccupied()
+	{
+		ArrayList<int[]> coordList;
+		int[] coord = new int[2];
+		for (String key : whitePieces.keySet()) {
+			displayChessPieceList(whitePieces.get(key));
+			for (ChessPiece chessPiece : chessPieceList) {
+				coord[0] = chessPiece.getXCoord();
+				coord[1] = chessPiece.getYCoord();
+				coordList.add(coord);
+			}		
+		}
+		
+		for (String key : blackPieces.keySet()) {
+			displayChessPieceList(whitePieces.get(key));
+			for (ChessPiece chessPiece : chessPieceList) {
+				coord[0] = chessPiece.getXCoord();
+				coord[1] = chessPiece.getYCoord();
+				coordList.add(coord);
+			}		
+		}
+		
+		return coordList;
 	}
 }
  

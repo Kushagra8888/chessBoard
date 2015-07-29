@@ -17,6 +17,7 @@ public class ChessGame {
 	final int whitePawnInitialYPos = 2;
 	
 	static HashMap<String, int[]> coordinateMap = new HashMap<String, int[]>();
+	static HashMap<int[], String> invertedCoordinateMap = new HashMap<int[], String>();
 	
 	private HashMap<String, ArrayList<ChessPiece>> blackPieces = new HashMap<String, ArrayList<ChessPiece>>();
 	private HashMap<String, ArrayList<ChessPiece>> whitePieces = new HashMap<String, ArrayList<ChessPiece>>();
@@ -35,6 +36,7 @@ public class ChessGame {
 				coord[0] = i;
 				coord[1] = j;
 				coordinateMap.put(xPositions[i] + yPositions[j], coord);
+				invertedCoordinateMap.put(coord, xPositions[i] + yPositions[j]);
 			}
 		}
 	}

@@ -1,4 +1,4 @@
-package chessgame;
+//package chessgame;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -175,26 +175,25 @@ public class ChessGame {
 	
 	public void showBoard () {
 		System.out.println("White ChessPieces\n");
-		for (HashMap.Entry<String, ArrayList<ChessPiece>> entry : whitePiece.entrySet()) {
-			String key = entry.getKey();
+		for (String key : whitePieces.keySet()) {
 			displayChessPieceType(key);
-			displayChessPieceList(entry.getValue());
+			displayChessPieceList(whitePieces.get(key));
 		}
 
 		System.out.println("Black ChessPieces\n");
-		for (HashMap.Entry<String, ArrayList<ChessPiece>> entry : blackPiece.entrySet()) {
-			String key = entry.getKey();
+		for (String key : blackPieces.keySet()) {
 			displayChessPieceType(key);
-			displayChessPieceList(entry.getValue());
+			displayChessPieceList(blackPieces.get(key));
 		}
 	}
 	
 	public void displayChessPieceList(ArrayList<ChessPiece> chessPieceList) {
 		int[] coord = new int[2];
-		coord[0] = chessPiece.getXCoord();
-		coord[1] = chessPiece.getYCoord();
+
 		String pos = invertedCoordinateMap.get(coord);
 		for (ChessPiece chessPiece : chessPieceList) {
+			coord[0] = chessPiece.getXCoord();
+			coord[1] = chessPiece.getYCoord();
 			System.out.println(pos + "; ");
 		}
 		System.out.println("\n");

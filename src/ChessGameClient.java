@@ -1,4 +1,4 @@
-package chessgame;
+//package chessgame;
 
 import java.util.*;
 import java.io.*;

@@ -13,12 +13,11 @@ public class King extends ChessPiece{
 	public boolean isMoveValid(int x, int y)
 	{
 		int diffInX = Math.abs(x - this.x);
-		int diffInY = Math.abs(x - this.y);
-		boolean isMoveValid = (diffInX <= 1) && (diffInY <= 1) && (diffInX + diffInY == 1);
-		return isMoveValid;
+		int diffInY = Math.abs(y - this.y);
+		return  ((diffInX <= 1) && (diffInY <= 1) && (diffInX + diffInY <= 2));
 	}
 	
-	public castling(int xRook)
+	public void castling(int xRook)
 	{
 		if (xRook == 8)
 		{

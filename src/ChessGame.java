@@ -129,12 +129,50 @@ public class ChessGame {
 		whitePieces.put("Q", wqueen);
 	}
 	
+	private void move (int[] coord, HashMap<String, ArrayList<ChessPiece>> chPs, String move) {
+		ArrayList<ChessPiece> chessPs;
+		
+		if (Character.isUpperCase(move.charAt(0))) {
+			switch (move.charAt(0)) {
+			case 'N': chessPs = chPs.get("N");
+				break;
+			case 'R': chessPs = chPs.get("R");
+				break;
+			case 'B': chessPs = chPs.get("B");
+				break; 
+			case 'K': chessPs = chPs.get("K");
+				break;
+			case 'Q': chessPs = chPs.get("Q");
+				break;
+			default:
+				chessPs = null;	
+			}
+		} else {
+			chessPs = chPs.get("P");
+		}
+		
+		for (ChessPiece ch : chessPs) {
+			if (ch.isAlive) {
+				if (ch.move(coord[0], coord[1])) {
+					break;
+				}
+			}
+		}
+	}
+	
 	public void move (String movePair) {
 		String[] moves = movePair.split("\\s+");
 		
+		int[] coord = new int[2];
+		coord = coordinateMap.get(moves[0]);
+		
+		move(coord, whitePieces, moves[0]);
+		move(coord, blackPieces, moves[1]);
 	}
+	
 	
 	public void showBoard () {
 		
 	}
 }
+ 

@@ -19,8 +19,8 @@ public class BishopTest {
     public void testMove() throws Exception {
         Bishop aBishop = new Bishop(5,5);
         assertTrue(aBishop.move(8,8));
-        assertTrue(aBishop.getPosition() == "G8");
+        assertTrue(aBishop.getPosition() == "g8");
         assertTrue(aBishop.move(3,3));
-        assertTrue(aBishop.getPosition() == "C3");
+        assertTrue(aBishop.getPosition() == "g3");
     }
 }

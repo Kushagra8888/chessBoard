@@ -1,4 +1,4 @@
-package chessgame;
+//package chessgame;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -18,6 +18,7 @@ public class ChessGame {
 	
 	static HashMap<String, int[]> coordinateMap = new HashMap<String, int[]>();
 	static HashMap<String, Integer> xCoordMap = new HashMap<String, Integer>(); 
+	static HashMap<int[], String> invertedCoordinateMap = new HashMap<int[], String>();
 	
 	private HashMap<String, ArrayList<ChessPiece>> blackPieces = new HashMap<String, ArrayList<ChessPiece>>();
 	private HashMap<String, ArrayList<ChessPiece>> whitePieces = new HashMap<String, ArrayList<ChessPiece>>();
@@ -36,6 +37,7 @@ public class ChessGame {
 				coord[0] = i;
 				coord[1] = j;
 				coordinateMap.put(xPositions[i] + yPositions[j], coord);
+				invertedCoordinateMap.put(coord, xPositions[i] + yPositions[j]);
 			}
 			xCoordMap.put(xPositions[i], i);
 		}
@@ -211,7 +213,58 @@ public class ChessGame {
 	
 	
 	public void showBoard () {
-		
+		System.out.println("White ChessPieces\n");
+		for (String key : whitePieces.keySet()) {
+			displayChessPieceType(key);
+			displayChessPieceList(whitePieces.get(key));
+		}
+
+		System.out.println("Black ChessPieces\n");
+		for (String key : blackPieces.keySet()) {
+			displayChessPieceType(key);
+			displayChessPieceList(blackPieces.get(key));
+		}
+	}
+	
+	public void displayChessPieceList(ArrayList<ChessPiece> chessPieceList) {
+		int[] coord = new int[2];
+
+		String pos = invertedCoordinateMap.get(coord);
+		for (ChessPiece chessPiece : chessPieceList) {
+			coord[0] = chessPiece.getXCoord();
+			coord[1] = chessPiece.getYCoord();
+			System.out.println(pos + "; ");
+		}
+		System.out.println("\n");
+	}
+	
+	public void displayChessPieceType(String key) {
+		switch(key)
+			{
+				case "P":
+				System.out.println("Pawns");
+				break;
+				
+				case "N":
+				System.out.println("Knight");
+				break;
+				
+				case "R":
+				System.out.println("Rook");
+				break;
+				
+				case "B":
+				System.out.println("Bishop");
+				break;
+				
+				case "K":
+				System.out.println("King");
+				break;
+				
+				case "Q":
+				System.out.println("Queen");
+				break;
+			}
 	}
 }
  

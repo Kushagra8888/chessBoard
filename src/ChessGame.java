@@ -172,7 +172,19 @@ public class ChessGame {
 	
 	
 	public void showBoard () {
-		
+		System.out.println("White ChessPieces\n");
+		for (HashMap.Entry<String, ArrayList<ChessPiece>> entry : whitePiece.entrySet()) {
+			String key = entry.getKey();
+			displayChessPieceType(key);
+			displayChessPieceList(entry.getValue());
+		}
+
+		System.out.println("Black ChessPieces\n");
+		for (HashMap.Entry<String, ArrayList<ChessPiece>> entry : blackPiece.entrySet()) {
+			String key = entry.getKey();
+			displayChessPieceType(key);
+			displayChessPieceList(entry.getValue());
+		}
 	}
 }
  

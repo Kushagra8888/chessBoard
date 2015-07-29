@@ -8,7 +8,7 @@ public class Pawn extends ChessPiece {
         this.isAlive = true;
     }
 
-    boolean isMoveValid(int xFinal, int yFinal) {
+    boolean isMoveValid(int xFinal, int yFinal, ArrayList<int[]> positionsOccupied) {
         return ((Math.abs(xFinal - x) == 1) && (Math.abs(yFinal - y) == 1));
     }
 }

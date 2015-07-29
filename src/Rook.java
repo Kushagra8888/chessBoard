@@ -10,13 +10,60 @@ public class Rook extends ChessPiece {
 		this.isAlive = true;
 	}
 	
-    boolean isMoveValid(int xFinal, int yFinal){
-        if ((x == xFinal) || (y == yFinal)) {
-            return true;
-        }
-        else{
-            return false;
-        }
+	boolean isPositionFree(int x, int y, ArrayList<int[]> positionsOccupied) {
+		for (int[] pos : positionsOccupied) {
+					if((pos[0] == x) && (pos[1] == y))
+					return false;
+		}
+		return true;
+	}
+	boolean isPathClear(int x, int y, ArrayList<int[]> positionsOccupied){
+	
+		if (x > this.x) {
+			while (x > this.x) {
+				if (!isPositionFree(x, y, positionsOccupied))
+					return false;
+				x--;
+			}
+		}
+		else
+		if (x < this.x) {
+			while (x < this.x) {
+				if (!isPositionFree(x, y, positionsOccupied))
+					return false;
+				x++;
+			}
+		}
+		else
+		if (y > this.y) {
+			while (y > this.y) {
+				if (!isPositionFree(x, y, positionsOccupied))
+					return false;
+				y--;
+			}
+		}
+		else
+		if (y < this.y) {
+			while (y < this.y) {
+				if (!isPositionFree(x, y, positionsOccupied))
+					return false;
+				y++;
+			}
+		}
+		
+		return true;
+	}
+	
+    boolean isMoveValid(int xFinal, int yFinal, ArrayList<int[]> positionsOccupied){
+        boolean isValidPosition = (x == xFinal) || (y == yFinal);
+        boolean isPathClear = isPathClear(x, y, positionsOccupied);
+	if (isValidPosition && isPathClear)
+	{
+		if(xFinal == -1 && yFinal == -1)
+			return (castle())
+	}
+	
+	return isValidPosition && isPathClear;
     }
 	
 	boolean castle()

@@ -15,6 +15,8 @@ public class ChessGame {
 
 	final int blackPawnInitialYPos = 7;
 	final int whitePawnInitialYPos = 2;
+
+	private ArrayList<Integer[]> coordList = new ArrayList<Integer[]>();
 	
 	static HashMap<String, int[]> coordinateMap = new HashMap<String, int[]>();
 	static HashMap<String, Integer> xCoordMap = new HashMap<String, Integer>(); 
@@ -42,6 +44,17 @@ public class ChessGame {
 			xCoordMap.put(xPositions[i], i);
 		}
 	}
+
+	private void capture(HashMap<String, ArrayList<ChessPiece>> listOfPieces, String position) {
+		for (String  pieceType: listOfPieces.keySet()) {
+			for (ChessPiece piece: listOfPieces.get(pieceType)){
+				if (piece.getXCoord() == coordinateMap.get(position)[0] && piece.getYCoord() == coordinateMap.get(position)[1]){
+					piece.capture();
+					break;
+				}
+			}
+		}
+	}
 	
 	public ChessGame () {
 		
@@ -61,6 +74,7 @@ public class ChessGame {
 		for (int i = 1; i <= 8; i++) {
 			bpawns.add(new Pawn(i, blackPawnInitialYPos));
 			wpawns.add(new Pawn(i, whitePawnInitialYPos));
+			Integer[] toAdd = {i,blackPawnInitialYPos};
 		}
 		
 		blackPieces.put("P", bpawns);
@@ -76,6 +90,7 @@ public class ChessGame {
 		
 		wknights.add(new Knight(2, 1));
 		wknights.add(new Knight(7, 1));
+
 			
 		blackPieces.put("N", bknights);
 		whitePieces.put("N", wknights);
@@ -226,7 +241,7 @@ public class ChessGame {
 		
 		for (ChessPiece ch : chessPs) {
 			if (ch.isAlive) {
-				if (isPieceInGivenPos (currPos, chessPs)) {
+				if (isPieceInGivenPos(currPos, chessPs)) {
 					if (ch.move(coord[0], coord[1])) {
 						break;
 					}
@@ -274,11 +289,10 @@ public class ChessGame {
 	
 	public void displayChessPieceList(ArrayList<ChessPiece> chessPieceList) {
 		int[] coord = new int[2];
-
-		String pos = invertedCoordinateMap.get(coord);
 		for (ChessPiece chessPiece : chessPieceList) {
 			coord[0] = chessPiece.getXCoord();
 			coord[1] = chessPiece.getYCoord();
+			String pos = invertedCoordinateMap.get(coord);
 			System.out.println(pos + "; ");
 		}
 		System.out.println("\n");
@@ -311,6 +325,31 @@ public class ChessGame {
 				System.out.println("Queen");
 				break;
 			}
+	}
+	
+	public ArrayList<int[]> generatePositionsOccupied()
+	{
+		ArrayList<int[]> coordList;
+		int[] coord = new int[2];
+		for (String key : whitePieces.keySet()) {
+			displayChessPieceList(whitePieces.get(key));
+			for (ChessPiece chessPiece : chessPieceList) {
+				coord[0] = chessPiece.getXCoord();
+				coord[1] = chessPiece.getYCoord();
+				coordList.add(coord);
+			}		
+		}
+		
+		for (String key : blackPieces.keySet()) {
+			displayChessPieceList(whitePieces.get(key));
+			for (ChessPiece chessPiece : chessPieceList) {
+				coord[0] = chessPiece.getXCoord();
+				coord[1] = chessPiece.getYCoord();
+				coordList.add(coord);
+			}		
+		}
+		
+		return coordList;
 	}
 }
  

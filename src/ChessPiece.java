@@ -17,6 +17,10 @@ public abstract class ChessPiece {
         }
         return false;
     }
+    
+    public void capture(){
+        isAlive = false;
+    }
 
     public int getXCoord(){
         return x;

@@ -6,7 +6,7 @@ import static org.junit.Assert.*;
  * Created by test on 7/29/2015.
  */
 public class BishopTest {
-
+    /*
     @Test
     public void testIsMoveValid() throws Exception {
         Bishop aBishop = new Bishop(5,5);
@@ -23,4 +23,5 @@ public class BishopTest {
         assertTrue(aBishop.move(3,3));
         assertTrue(aBishop.getPosition() == "g3");
     }
+    */
 }

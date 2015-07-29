@@ -134,6 +134,9 @@ public class ChessGame {
 	}
 	
 	private boolean isPieceInGivenPos (String currPos, ArrayList<ChessPiece> chPs) {
+		if (currPos == null) {
+			return true;
+		}
 		if (xCoordMap.containsKey(currPos)) {
 			return isPieceInGivenXCoord(currPos, chPs);
 		} else {
@@ -159,9 +162,34 @@ public class ChessGame {
 		return false;
 	}
 	
-	private void move (int[] coord, HashMap<String, ArrayList<ChessPiece>> chPs, String move) {
+	private void move (HashMap<String, ArrayList<ChessPiece>> chPs, String move) {
 		ArrayList<ChessPiece> chessPs;
 		String movPos;
+		
+		if (move == "O-O" || move == "O-O-O") {
+			int xCoord, kingPos;
+			chessPs = chPs.get("K");
+			ChessPiece king = chessPs.get(0);
+			chessPs = chPs.get("R");
+			if (move == "O-O") {
+				xCoord = 8;
+				kingPos = 7; 
+			} else {
+				xCoord = 1;
+				kingPos = 3;
+			}
+				
+			for (ChessPiece ch : chessPs) {
+				if (ch.getXCoord() == xCoord) {
+					ch.move(-1, -1);
+					king.move(kingPos, king.getYCoord());
+					break;
+				}
+			}
+			
+			return;
+		}	
+		
 		if (Character.isUpperCase(move.charAt(0))) {
 			movPos = move.substring(1);
 			switch (move.charAt(0)) {
@@ -184,10 +212,18 @@ public class ChessGame {
 		}
 		
 		String currPos = null;
+		String movPosFinal;
+		
 		if ( ! coordinateMap.containsKey(movPos)) {
 			currPos = movPos.substring(0, 1);
+			movPosFinal = movPos.substring(1, 3);
+		} else {
+			movPosFinal = movPos;
 		}
-			
+		
+		int[] coord;
+		coord = coordinateMap.get(movPosFinal);
+		
 		for (ChessPiece ch : chessPs) {
 			if (ch.isAlive) {
 				if (isPieceInGivenPos (currPos, chessPs)) {
@@ -202,13 +238,23 @@ public class ChessGame {
 	public void move (String movePair) {
 		String[] moves = movePair.split("\\s+");
 		
-		int[] coord = new int[2];
+		if (moves[0].contains("x")) {
+			String[] positions = moves[0].split("x");
+			move( whitePieces, positions[0]);
+			capture(blackPieces, positions[1]);
+		} else {
+			
+			move( whitePieces, moves[0]);
+		}
 		
-		coord = coordinateMap.get(moves[0]);
-		move(coord, whitePieces, moves[0]);
+		if (moves[1].contains("x")) {
+			String[] positions = moves[1].split("x");
+			move(blackPieces, positions[0]);
+			capture(whitePieces, positions[1]);
+		} else {
+			move(blackPieces, moves[1]);
+		}
 		
-		coord = coordinateMap.get(moves[1]);
-		move(coord, blackPieces, moves[1]);
 	}
 	
 	

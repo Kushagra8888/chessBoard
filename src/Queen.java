@@ -9,7 +9,7 @@ public class Queen extends ChessPiece {
         this.y = y;
         this.isAlive = true;
     }
-    boolean isMoveValid(int xFinal, int yFinal){
+    boolean isMoveValid(int xFinal, int yFinal, ArrayList<int[]> positionsOccupied){
         if (((x == xFinal) || (y == yFinal)) || (Math.abs(x - xFinal) == Math.abs(y - yFinal))) {
             return true;
         }

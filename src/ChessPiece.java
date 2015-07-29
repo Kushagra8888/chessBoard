@@ -16,4 +16,16 @@ public abstract class ChessPiece {
         return false;
     }
 
+    public int getXCoord(){
+        return x;
+    }
+
+    public int getYCoord(){
+        return y;
+    }
+
+    public String getPosition(){
+        return (char) (x + 97 - 1) + "" + y;
+    }
+
 }

@@ -38,8 +38,8 @@ public class ChessGame {
 			for (int j = 1; j <= 8; j++) {
 				coord[0] = i;
 				coord[1] = j;
-				coordinateMap.put(xPositions[i] + yPositions[j], coord);
-				invertedCoordinateMap.put(coord, xPositions[i] + yPositions[j]);
+				coordinateMap.put(xPositions[i-1] + yPositions[j-1], coord);
+				invertedCoordinateMap.put(coord, xPositions[i-1] + yPositions[j-1]);
 			}
 			xCoordMap.put(xPositions[i], i);
 		}

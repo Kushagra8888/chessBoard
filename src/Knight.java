@@ -10,7 +10,7 @@ public class Knight extends ChessPiece{
 		this.isAlive = true;
 	}
 	
-	public boolean isMoveValid(int x, int y)
+	public boolean isMoveValid(int x, int y, ArrayList<int[]> positionsOccupied)
 	{
 		int diffInX = Math.abs(x - this.x);
 		int diffInY = Math.abs(x - this.y);

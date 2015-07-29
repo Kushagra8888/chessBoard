@@ -329,10 +329,10 @@ public class ChessGame {
 	
 	public ArrayList<int[]> generatePositionsOccupied()
 	{
-		ArrayList<int[]> coordList;
+		ArrayList<int[]> coordList = new ArrayList<int[]>();
 		int[] coord = new int[2];
 		for (String key : whitePieces.keySet()) {
-			displayChessPieceList(whitePieces.get(key));
+			ArrayList<ChessPiece> chessPieceList = whitePieces.get(key);
 			for (ChessPiece chessPiece : chessPieceList) {
 				coord[0] = chessPiece.getXCoord();
 				coord[1] = chessPiece.getYCoord();
@@ -341,7 +341,7 @@ public class ChessGame {
 		}
 		
 		for (String key : blackPieces.keySet()) {
-			displayChessPieceList(whitePieces.get(key));
+			ArrayList<ChessPiece> chessPieceList = blackPieces.get(key);
 			for (ChessPiece chessPiece : chessPieceList) {
 				coord[0] = chessPiece.getXCoord();
 				coord[1] = chessPiece.getYCoord();

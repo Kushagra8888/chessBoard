@@ -11,7 +11,6 @@ import java.util.HashMap;
  *
  */
 
-
 public class ChessGame {
 
 	final int blackPawnInitialYPos = 7;
@@ -27,7 +26,17 @@ public class ChessGame {
 	}
 	
 	private static void generateCoordinateMap () {
+		int[] coord = new int[2];
+		String[] xPositions = {"a", "b", "c", "d", "e", "f", "g", "h"};
+		String[] yPositions = {"1", "2", "3", "4", "5", "6", "7", "8"};
 		
+		for (int i = 1; i <= 8 ; i++) {
+			for (int j = 1; j <= 8; j++) {
+				coord[0] = i;
+				coord[1] = j;
+				coordinateMap.put(xPositions[i] + yPositions[j], coord);
+			}
+		}
 	}
 	
 	public ChessGame () {

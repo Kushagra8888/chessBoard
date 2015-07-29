@@ -1,4 +1,4 @@
-package chessgame;
+//package chessgame;
 
 public class Pawn extends ChessPiece {
     Pawn(int x, int y)
@@ -8,7 +8,7 @@ public class Pawn extends ChessPiece {
         this.isAlive = true;
     }
 
-    boolean isMoveValid(int xFinal, int yFinal){
-        return y == yFinal;
+    boolean isMoveValid(int xFinal, int yFinal) {
+        return ((Math.abs(xFinal - x) == 1) && (Math.abs(yFinal - y) == 1));
     }
 }

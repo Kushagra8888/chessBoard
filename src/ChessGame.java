@@ -186,5 +186,45 @@ public class ChessGame {
 			displayChessPieceList(entry.getValue());
 		}
 	}
+	
+	public void displayChessPieceList(ArrayList<ChessPiece> chessPieceList) {
+		int[] coord = new int[2];
+		coord[0] = chessPiece.getXCoord();
+		coord[1] = chessPiece.getYCoord();
+		String pos = invertedCoordinateMap.get(coord);
+		for (ChessPiece chessPiece : chessPieceList) {
+			System.out.println(pos + "; ");
+		}
+		System.out.println("\n");
+	}
+	
+	public void displayChessPieceType(String key) {
+		switch(key)
+			{
+				case "P":
+				System.out.println("Pawns");
+				break;
+				
+				case "N":
+				System.out.println("Knight");
+				break;
+				
+				case "R":
+				System.out.println("Rook");
+				break;
+				
+				case "B":
+				System.out.println("Bishop");
+				break;
+				
+				case "K":
+				System.out.println("King");
+				break;
+				
+				case "Q":
+				System.out.println("Queen");
+				break;
+			}
+	}
 }
  

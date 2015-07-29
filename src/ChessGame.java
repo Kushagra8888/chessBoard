@@ -15,6 +15,8 @@ public class ChessGame {
 
 	final int blackPawnInitialYPos = 7;
 	final int whitePawnInitialYPos = 2;
+
+	private ArrayList<Integer[]> coordList = new ArrayList<Integer[]>();
 	
 	static HashMap<String, int[]> coordinateMap = new HashMap<String, int[]>();
 	static HashMap<String, Integer> xCoordMap = new HashMap<String, Integer>(); 
@@ -42,6 +44,17 @@ public class ChessGame {
 			xCoordMap.put(xPositions[i], i);
 		}
 	}
+
+	private void capture(HashMap<String, ArrayList<ChessPiece>> listOfPieces, String position) {
+		for (String  pieceType: listOfPieces.keySet()) {
+			for (ChessPiece piece: listOfPieces.get(pieceType)){
+				if (piece.getXCoord() == coordinateMap.get(position)[0] && piece.getYCoord() == coordinateMap.get(position)[1]){
+					piece.capture();
+					break;
+				}
+			}
+		}
+	}
 	
 	public ChessGame () {
 		
@@ -61,6 +74,7 @@ public class ChessGame {
 		for (int i = 1; i <= 8; i++) {
 			bpawns.add(new Pawn(i, blackPawnInitialYPos));
 			wpawns.add(new Pawn(i, whitePawnInitialYPos));
+			Integer[] toAdd = {i,blackPawnInitialYPos};
 		}
 		
 		blackPieces.put("P", bpawns);
@@ -76,6 +90,7 @@ public class ChessGame {
 		
 		wknights.add(new Knight(2, 1));
 		wknights.add(new Knight(7, 1));
+
 			
 		blackPieces.put("N", bknights);
 		whitePieces.put("N", wknights);
@@ -190,7 +205,7 @@ public class ChessGame {
 			
 		for (ChessPiece ch : chessPs) {
 			if (ch.isAlive) {
-				if (isPieceInGivenPos (currPos, chessPs)) {
+				if (isPieceInGivenPos(currPos, chessPs)) {
 					if (ch.move(coord[0], coord[1])) {
 						break;
 					}

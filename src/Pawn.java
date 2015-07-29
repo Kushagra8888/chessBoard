@@ -1,6 +1,5 @@
-/**
- * Created by test on 7/29/2015.
- */
+package chessgame;
+
 public class Pawn extends ChessPiece {
     Pawn(int x, int y)
     {
@@ -10,11 +9,6 @@ public class Pawn extends ChessPiece {
     }
 
     boolean isMoveValid(int xFinal, int yFinal){
-        if (y == yFinal) {
-            return true;
-        }
-        else{
-            return false;
-        }
+        return y == yFinal;
     }
 }

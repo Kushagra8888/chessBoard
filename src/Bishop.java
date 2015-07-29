@@ -9,9 +9,9 @@ public class Bishop extends ChessPiece{
 		this.isAlive = true;
 	}
 	
-	public bool isMoveValid(int x, int y)
+	public boolean isMoveValid(int x, int y)
 	{
-		bool isMoveValid = x - this.x == y - this.y;
+		boolean isMoveValid = x - this.x == y - this.y;
 		return isMoveValid;
 	}
 }

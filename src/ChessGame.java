@@ -196,8 +196,8 @@ public class ChessGame {
 				
 			for (ChessPiece ch : chessPs) {
 				if (ch.getXCoord() == xCoord) {
-					ch.move(-1, -1);
-					king.move(kingPos, king.getYCoord());
+					ch.move(-1, -1, generatePositionsOccupied());
+					king.move(kingPos, king.getYCoord(), generatePositionsOccupied());
 					break;
 				}
 			}
@@ -236,13 +236,14 @@ public class ChessGame {
 			movPosFinal = movPos;
 		}
 		
-		int[] coord;
-		coord = coordinateMap.get(movPosFinal);
-		
+		int[] coord = new int[2];
+		coord[0] = coordinateMap.get(movPosFinal)[0];
+		coord[1] = coordinateMap.get(movPosFinal)[1];
+
 		for (ChessPiece ch : chessPs) {
 			if (ch.isAlive) {
 				if (isPieceInGivenPos(currPos, chessPs)) {
-					if (ch.move(coord[0], coord[1])) {
+					if (ch.move(coord[0], coord[1], generatePositionsOccupied())) {
 						break;
 					}
 				}
@@ -334,18 +335,22 @@ public class ChessGame {
 		for (String key : whitePieces.keySet()) {
 			ArrayList<ChessPiece> chessPieceList = whitePieces.get(key);
 			for (ChessPiece chessPiece : chessPieceList) {
-				coord[0] = chessPiece.getXCoord();
-				coord[1] = chessPiece.getYCoord();
-				coordList.add(coord);
+				if (chessPiece.isAlive) {
+					coord[0] = chessPiece.getXCoord();
+					coord[1] = chessPiece.getYCoord();
+					coordList.add(coord);
+				}
 			}		
 		}
 		
 		for (String key : blackPieces.keySet()) {
 			ArrayList<ChessPiece> chessPieceList = blackPieces.get(key);
 			for (ChessPiece chessPiece : chessPieceList) {
-				coord[0] = chessPiece.getXCoord();
-				coord[1] = chessPiece.getYCoord();
-				coordList.add(coord);
+				if (chessPiece.isAlive) {
+					coord[0] = chessPiece.getXCoord();
+					coord[1] = chessPiece.getYCoord();
+					coordList.add(coord);
+				}
 			}		
 		}
 		

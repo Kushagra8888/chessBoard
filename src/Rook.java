@@ -57,7 +57,13 @@ public class Rook extends ChessPiece {
     boolean isMoveValid(int xFinal, int yFinal, ArrayList<int[]> positionsOccupied){
         boolean isValidPosition = (x == xFinal) || (y == yFinal);
         boolean isPathClear = isPathClear(x, y, positionsOccupied);
-		return isValidPosition && isPathClear;
+	if (isValidPosition && isPathClear)
+	{
+		if(xFinal == -1 && yFinal == -1)
+			return (castle())
+	}
+	
+	return isValidPosition && isPathClear;
     }
 	
 	boolean castle()

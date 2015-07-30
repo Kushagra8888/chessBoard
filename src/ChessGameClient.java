@@ -17,9 +17,16 @@ class ChessGameClient
 		
 		for (int index = 1; index < movesArray.length; index++){
 			currentMove = movesArray[index].split(" ");
+		
 			move = currentMove[0];
+			if	(Character.isUpperCase(currentMove[0].charAt(0)))
+				currentMove[0] = "P" + currentMove[0];
 			if (currentMove[1] != null)
-			move += " " + currentMove[1];
+			{	
+				if(Character.isUpperCase(currentMove[1].charAt(0)))
+					currentMove[1] = "P" + currentMove[1];
+				move += " " + currentMove[1];
+			}
 			chessGame.move(move);
 		}
  		br.close();
